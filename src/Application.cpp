@@ -2,6 +2,7 @@
 
 Application::Application()
 {
+    // salut
 }
 
 bool Application::Init()
