@@ -1,7 +1,7 @@
 #include "Application.h"
 
 Application::Application()
-    : m_Board(Board(m_Win, {20, 20}))
+    : m_Board(Board(m_Win, {20, 20}, 26))
 {
 }
 
@@ -25,6 +25,10 @@ void Application::Run()
             if (m_Event.type == sf::Event::KeyPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             {
                 m_Running = false;
+            }
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                m_Board.ToggleWall(sf::Mouse::getPosition(m_Win), sf::Keyboard::isKeyPressed(sf::Keyboard::LShift));
             }
         }
         m_Board.Draw();

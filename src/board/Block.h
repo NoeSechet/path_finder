@@ -7,7 +7,7 @@
 class Block
 {
 private:
-	bool m_IsObtacle = false;
+	bool m_IsWall = false;
 	sf::Vector2f m_Pos = { 0.0,0.0 };
 	sf::RectangleShape m_Rect;
 
@@ -19,14 +19,10 @@ public:
 	}
 	~Block() = default;
 
-	int GetStatus() const { return m_IsObtacle; }
-	void SetPosition(sf::Vector2f newPos) {
-		m_Pos = newPos;
-		m_Rect.setPosition(sf::Vector2f(
-			newPos.x * 30,
-			newPos.y * 30
-		));
-	}
+	int GetStatus() const { return m_IsWall; }
+	void SetPosition(sf::Vector2f newPos, float offset);
 
 	void Draw(sf::RenderWindow& window) const;
+	bool IsClicked(sf::Vector2i mousePos) const;
+	void SetIsWall(bool isWall);
 };
