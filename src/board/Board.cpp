@@ -9,6 +9,8 @@ Board::Board(sf::RenderWindow &window, sf::Vector2u dim = {20, 20}, float offset
 			m_Board[i][j].SetPosition(sf::Vector2f(i, j), m_Offset);
 		}
 	}
+	m_Board[dim.y / 4][dim.x / 4].SetType(BLOCK_TYPE::START);
+	m_Board[dim.y - dim.y / 4][dim.x - dim.x / 4].SetType(BLOCK_TYPE::END);
 }
 
 Board::~Board()
@@ -16,11 +18,15 @@ Board::~Board()
 
 }
 
+/*
+	I could optimize that part (directly get the clicked block
+	instead of parsing through all the blocks
+*/
 void Board::ToggleWall(sf::Vector2i mousePos, bool shiftPressed)
 {
 	for (auto &line : m_Board) {
 		for (Block &block : line) {
-			if (block.IsClicked(mousePos)) {
+			if (block.IsClicked(mousePos) && block.GetType() == BLOCK_TYPE::COMM) {
 				block.SetIsWall(shiftPressed);
 			}
 		}

@@ -34,3 +34,14 @@ bool Block::IsClicked(sf::Vector2i mousePos) const
 		mousePos.y >= rec_pos.y && mousePos.y <= rec_pos.y + rec_dim.y
 	);
 }
+
+void Block::SetType(BLOCK_TYPE type)
+{
+	switch (type) {
+		case BLOCK_TYPE::COMM: m_Rect.setFillColor(sf::Color::White); break;
+		case BLOCK_TYPE::START: m_Rect.setFillColor(sf::Color::Blue); break;
+		case BLOCK_TYPE::END: m_Rect.setFillColor(sf::Color::Magenta); break;
+		default: m_Rect.setFillColor(sf::Color::White); break;
+	}
+	m_Type = type;
+}
